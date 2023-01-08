@@ -1,19 +1,43 @@
 {
-  "name": "web3-start",
+  "name": "@web3-start/monorepo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "pnpm -r --filter='./packages/**' run build"
-  },
+  "description": "A web3 development kit.",
   "keywords": [],
-  "author": "wy",
-  "license": "ISC",
+  "type": "module",
+  "private": true,
+  "author": "Moseu",
+  "packageManager": "pnpm@7.22.0",
+  "scripts": {
+    "build": "pnpm -r --filter='./packages/**' run build",
+    "lint": "eslint --cache .",
+    "lint:fix": "eslint . --fix"
+  },
   "dependencies": {
     "ethers": "^5.7.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lint-staged": "^13.1.0",
+    "pnpm": "7.22.0",
+    "prettier": "^2.8.2",
+    "prettier-eslint": "^15.0.1",
     "rimraf": "^3.0.2",
+    "simple-git-hooks": "^2.8.1",
     "typescript": "^4.9.4"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue,md}": [
+      "eslint --cache --fix"
+    ],
+    "{package.json, tsconfig.json}": [
+      "prettier --write--parser json"
+    ]
   }
 }

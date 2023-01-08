@@ -1,5 +1,5 @@
 {
-  "name": "connector",
+  "name": "@web3-start/connector",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
-  "author": "wy",
+  "author": "Moseu",
   "license": "ISC",
   "dependencies": {
     "@walletconnect/qrcode-modal": "^1.8.0",

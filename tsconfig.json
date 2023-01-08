@@ -15,11 +15,11 @@
     "lib": [
       "esnext",
       "dom",
-      "scripthost"
     ],
     "types": [
       "node",
-    ]
+    ],
+    "paths": {},
   },
   "exclude": [
     "node_modules"

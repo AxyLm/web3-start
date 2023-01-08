@@ -1,14 +1,7 @@
 import { Connector } from '~/connectors/connector';
 
 import { hexValue } from 'ethers/lib/utils';
-import {
-  AddChainError,
-  ProviderRpcError,
-  ProviderNotFoundError,
-  UserRejectedRequestError,
-  SwitchChainError,
-} from './errors';
-
+import { AddChainError, ProviderRpcError, ProviderNotFoundError, UserRejectedRequestError, SwitchChainError } from './errors';
 
 /**
  * MetaMask
@@ -75,8 +68,7 @@ export class MetaMaskConnector extends Connector<MetaMaskProvider, MetaMaskConne
      * @link https://github.com/chnejohnson/vue-dapp/pull/36
      */
     const isMulti = (provider?.providers?.length || 0) > 1;
-    isMulti &&
-      (provider = provider?.providers?.find((e: MetaMaskProvider) => e.isMetaMask) || provider);
+    isMulti && (provider = provider?.providers?.find((e: MetaMaskProvider) => e.isMetaMask) || provider);
 
     this.#provider = provider;
 
@@ -114,10 +106,8 @@ export class MetaMaskConnector extends Connector<MetaMaskProvider, MetaMaskConne
     if (!this.#provider) throw new ProviderNotFoundError();
 
     this.#onDisconnectHandler && this.#removeListener('disconnect', this.#onDisconnectHandler);
-    this.#onAccountsChangedHandler &&
-      this.#removeListener('accountsChanged', this.#onAccountsChangedHandler);
-    this.#onChainChangedHandler &&
-      this.#removeListener('chainChanged', this.#onChainChangedHandler);
+    this.#onAccountsChangedHandler && this.#removeListener('accountsChanged', this.#onAccountsChangedHandler);
+    this.#onChainChangedHandler && this.#removeListener('chainChanged', this.#onChainChangedHandler);
 
     this.#provider = undefined;
     this.#onDisconnectHandler = undefined;
@@ -178,11 +168,7 @@ export class MetaMaskConnector extends Connector<MetaMaskProvider, MetaMaskConne
     } catch (err: unknown) {
       if ((<ProviderRpcError>err).code === 4902) {
         try {
-          await this.addChain(
-            _availableNetworks[
-              chainId as keyof typeof NETWORK_DETAILS
-            ] as AddEthereumChainParameter,
-          );
+          await this.addChain(_availableNetworks[chainId as keyof typeof NETWORK_DETAILS] as AddEthereumChainParameter);
         } catch (err: unknown) {
           if (this.#isUserRejectedRequestError(err)) {
             throw new UserRejectedRequestError(err);

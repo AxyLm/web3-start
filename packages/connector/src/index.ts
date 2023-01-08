@@ -1,2 +1,2 @@
-export * from "./metamask"
-export * from "./wallet-connect"
+export * from './metamask';
+export * from './wallet-connect';
